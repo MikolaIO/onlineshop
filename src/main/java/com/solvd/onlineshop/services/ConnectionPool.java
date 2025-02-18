@@ -46,31 +46,32 @@ public class ConnectionPool {
         return connectedPool.size();
     }
 
-    public void getConnection() {
+    public Connection getConnection() {
         Connection connection = pool.getLast();
         connectedPool.add(connection);
         logger.info("Got connection");
+        return connection;
     }
 
-    public void releaseConnection() {
+    public void releaseConnection(Connection connection) {
         pool.add(connectedPool.getLast());
-        connectedPool.removeLast();
+        connectedPool.remove(connection);
         logger.info("Released connection");
     }
 
     private static Connection createConnection() {
         logger.info("Created connection");
-        Connection conn = null;
+        Connection connection = null;
 
         try {
-            conn = DriverManager.getConnection(
+            connection = DriverManager.getConnection(
                     properties.getProperty("db.url"),
                     properties.getProperty("db.usr"),
                     properties.getProperty("db.passwd"));
         } catch (SQLException ex) {
             logger.error("Failed to establish connection: ", ex);
         }
-        return conn;
+        return connection;
     }
 
     private void loadProperties() {
