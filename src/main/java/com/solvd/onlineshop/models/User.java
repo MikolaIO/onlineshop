@@ -5,13 +5,12 @@ public class User {
     private String firstName;
     private String lastName;
     private int age;
-    private int addressId;
+    private long addressId;
 
-    public User(Long id, String firstName, String lastName, int age, int addressId) {
+    public User(String firstName, String lastName, int age) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.age = age;
-        this.addressId = addressId;
     }
 
     public User() {}
@@ -32,7 +31,7 @@ public class User {
         this.age = age;
     }
 
-    public void setAddressId(int addressId) {
+    public void setAddressId(long addressId) {
         this.addressId = addressId;
     }
 
@@ -52,7 +51,7 @@ public class User {
         return age;
     }
 
-    public int getAddressId() {
+    public long getAddressId() {
         return addressId;
     }
 }

@@ -14,9 +14,9 @@ public class UserDAO implements IUserDAO {
     private final static Logger logger = LogManager.getLogger(UserDAO.class.getName());
     private final static String GET_BY_FULL_NAME = "SELECT * FROM Users WHERE first_name = ? AND last_name = ?";
     private final static String GET_BY_EMAIL = "SELECT * FROM Users WHERE id IN (SELECT user_id FROM Credentials WHERE mail = ?)";
-    private final static String GET_BY_ADDRESS_ID = "SELECT * FROM Users WHERE address_id = ?)";
-    private final static String GET_BY_ID = "SELECT * FROM Users WHERE id = ?)";
-    private final static String SAVE = "INSERT INTO Users (first_name, last_name, age, address_id) VALUES (?, ?, ?, ?))";
+    private final static String GET_BY_ADDRESS_ID = "SELECT * FROM Users WHERE address_id = ?";
+    private final static String GET_BY_ID = "SELECT * FROM Users WHERE id = ?";
+    private final static String SAVE = "INSERT INTO Users (first_name, last_name, age, address_id) VALUES (?, ?, ?, ?)";
     private final static String UPDATE = "UPDATE Users SET first_name = ?, last_name = ?, age = ?, address_id = ? WHERE id = ?";
     private final static String REMOVE_BY_ID = "DELETE FROM Users WHERE id = ?";
 
@@ -115,7 +115,7 @@ public class UserDAO implements IUserDAO {
             statement.setString(1, entity.getFirstName());
             statement.setString(2, entity.getLastName());
             statement.setInt(3, entity.getAge());
-            statement.setInt(4, entity.getAddressId());
+            statement.setLong(4, entity.getAddressId());
 
             if (statement.executeUpdate() == 0) {
                 throw new IllegalStateException("Saving user failed, no rows affected.");
@@ -141,7 +141,7 @@ public class UserDAO implements IUserDAO {
             statement.setString(1, entity.getFirstName());
             statement.setString(2, entity.getLastName());
             statement.setInt(3, entity.getAge());
-            statement.setInt(4, entity.getAddressId());
+            statement.setLong(4, entity.getAddressId());
             statement.setLong(5, entity.getId());
 
             if (statement.executeUpdate() == 0) {
@@ -175,7 +175,7 @@ public class UserDAO implements IUserDAO {
         user.setFirstName(resultSet.getString("first_name"));
         user.setLastName(resultSet.getString("last_name"));
         user.setAge(resultSet.getInt("age"));
-        user.setAddressId(resultSet.getInt("address_id"));
+        user.setAddressId(resultSet.getLong("address_id"));
 
         return user;
     }
