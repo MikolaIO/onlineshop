@@ -18,10 +18,10 @@ public class Main {
 
         UserService userService = new UserService();
         Address address = new Address("Zgonna", "Wroclaw", "50-251");
-        User user = new User("Piotr", "Nijaki", 50);
         Credential credential = new Credential("spider", "passwd", "spider@gmail.com");
 
-        user = userService.create(user, credential, address);
-        logger.info(user);
+        User user = userService.getByFullName("Piotr", "Nijaki");
+        user.setFirstName("Pawel");
+        userService.update(user);
     }
 }

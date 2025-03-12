@@ -172,6 +172,7 @@ public class UserDAO implements IUserDAO {
     private User getMappedUser(ResultSet resultSet) throws SQLException {
         User user = new User();
 
+        user.setId(resultSet.getLong("id"));
         user.setFirstName(resultSet.getString("first_name"));
         user.setLastName(resultSet.getString("last_name"));
         user.setAge(resultSet.getInt("age"));

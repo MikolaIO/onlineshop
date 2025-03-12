@@ -79,7 +79,7 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public User update(User user, Credential credential) {
+    public User update(User user) {
         logger.info("Updating user with ID: {}", user.getId());
 
         if (userDAO.getById(user.getId()) == null) {
@@ -87,7 +87,7 @@ public class UserService implements IUserService {
             throw new IllegalArgumentException("User not found");
         }
         userDAO.update(user);
-        User updatedUser = userDAO.getUserByEmail(credential.getMail());
+        User updatedUser = userDAO.getById(user.getId());
         if (updatedUser != null) {
             logger.info("Successfully updated user with ID: {}", user.getId());
         } else {

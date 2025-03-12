@@ -11,6 +11,6 @@ public interface IUserService {
     User getByFullName(String firstName, String lastName);
     User getByEmail(String email);
     User create(User user, Credential credential, Address address);
-    User update(User user, Credential credential);
+    User update(User user);
     void deleteById(Long id);
 }
